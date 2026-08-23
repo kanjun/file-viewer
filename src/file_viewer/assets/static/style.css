@@ -1,0 +1,316 @@
+:root {
+    --bg: #fafaf7;
+    --bg-soft: #f1efe9;
+    --bg-tint: #f6f4ed;
+    --ink: #1f1d1a;
+    --ink-soft: #5a554c;
+    --ink-faint: #8b8576;
+    --rule: #d8d3c5;
+    --accent: #2f5f73;
+    --accent-hover: #1f4555;
+    --dir: #7a5837;
+
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    --font-serif: "EB Garamond", Garamond, "Iowan Old Style", "Palatino Linotype", Palatino, serif;
+    --font-mono: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+/* ----- topbar ----- */
+.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    background: var(--bg-soft);
+    border-bottom: 1px solid var(--rule);
+    padding: 0.5rem 1.2rem;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+}
+
+.crumbs {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.25rem;
+    min-width: 0;
+}
+
+.crumbs__link {
+    color: var(--accent);
+    text-decoration: none;
+    padding: 0.1rem 0.2rem;
+    border-radius: 2px;
+}
+
+.crumbs__link:hover {
+    background: var(--bg);
+    color: var(--accent-hover);
+}
+
+.crumbs__sep {
+    color: var(--ink-faint);
+    margin: 0 0.05rem;
+}
+
+.crumbs__here {
+    color: var(--ink);
+    font-weight: 500;
+}
+
+.topbar__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-shrink: 0;
+}
+
+.meta-tag {
+    color: var(--ink-faint);
+    font-size: 0.8rem;
+}
+
+.action-link {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.85rem;
+    border-bottom: 1px dotted var(--accent);
+}
+
+.action-link:hover {
+    color: var(--accent-hover);
+    border-bottom-style: solid;
+}
+
+main {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 1.5rem 1.2rem 4rem;
+}
+
+/* ----- directory listing ----- */
+.listing__table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-mono);
+    font-size: 0.88rem;
+}
+
+.listing__table th {
+    text-align: left;
+    color: var(--ink-faint);
+    font-weight: 500;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--rule);
+    padding: 0.4rem 0.6rem;
+}
+
+.listing__table td {
+    padding: 0.3rem 0.6rem;
+    border-bottom: 1px solid var(--bg-soft);
+}
+
+.col-name { width: auto; }
+.col-size { width: 5rem; color: var(--ink-faint); }
+.col-time { width: 10rem; color: var(--ink-faint); }
+
+.listing__row a {
+    color: var(--ink);
+    text-decoration: none;
+}
+
+.listing__row--dir a {
+    color: var(--dir);
+    font-weight: 500;
+}
+
+.listing__row a:hover {
+    text-decoration: underline;
+}
+
+.listing__row .icon {
+    display: inline-block;
+    width: 1.2em;
+    color: var(--ink-faint);
+}
+
+.listing__row--up a {
+    color: var(--accent);
+}
+
+.empty {
+    color: var(--ink-faint);
+    font-style: italic;
+    text-align: center;
+    padding: 2rem;
+}
+
+/* ----- file view ----- */
+.file-view {
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 1.5rem 2rem;
+}
+
+.file-view--markdown {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    line-height: 1.65;
+}
+
+.file-view--markdown h1,
+.file-view--markdown h2,
+.file-view--markdown h3,
+.file-view--markdown h4 {
+    font-family: var(--font-serif);
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.25;
+}
+
+.file-view--markdown h1 { font-size: 1.8rem; border-bottom: 1px solid var(--rule); padding-bottom: 0.3rem; }
+.file-view--markdown h2 { font-size: 1.4rem; }
+.file-view--markdown h3 { font-size: 1.15rem; }
+.file-view--markdown h4 { font-size: 1.0rem; }
+
+.file-view--markdown p { margin: 0.7rem 0; }
+.file-view--markdown ul, .file-view--markdown ol { padding-left: 1.6rem; }
+.file-view--markdown li { margin: 0.2rem 0; }
+
+.file-view--markdown a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+.file-view--markdown a:hover {
+    color: var(--accent-hover);
+    border-bottom-color: var(--accent-hover);
+}
+
+.file-view--markdown code {
+    font-family: var(--font-mono);
+    font-size: 0.88em;
+    background: var(--bg-tint);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    padding: 0.05em 0.35em;
+}
+
+.file-view--markdown pre {
+    background: var(--bg-tint);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 0.8rem 1rem;
+    overflow-x: auto;
+}
+
+.file-view--markdown pre code {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    font-size: 0.85rem;
+}
+
+.file-view--markdown blockquote {
+    border-left: 3px solid var(--rule);
+    margin-left: 0;
+    padding-left: 1rem;
+    color: var(--ink-soft);
+}
+
+.file-view--markdown table {
+    border-collapse: collapse;
+    margin: 1rem 0;
+}
+
+.file-view--markdown th,
+.file-view--markdown td {
+    border: 1px solid var(--rule);
+    padding: 0.4rem 0.8rem;
+}
+
+.file-view--markdown th {
+    background: var(--bg-tint);
+}
+
+.file-view--markdown hr {
+    border: 0;
+    border-top: 1px solid var(--rule);
+    margin: 2rem 0;
+}
+
+/* code / json / text view */
+.file-view--code,
+.file-view--json {
+    padding: 0;
+    background: var(--bg-tint);
+}
+
+.file-view--binary {
+    padding: 1.5rem 2rem;
+}
+
+.notice {
+    color: var(--ink-faint);
+    font-style: italic;
+    text-align: center;
+    margin: 1.5rem 0;
+}
+
+/* Pygments line-number table fixups */
+.highlight {
+    font-family: var(--font-mono);
+    font-size: 0.88rem;
+    line-height: 1.5;
+    overflow-x: auto;
+}
+
+.highlight table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.highlight td {
+    padding: 0;
+}
+
+.highlight td.linenos {
+    width: 3em;
+    padding: 0.05rem 0.5rem;
+    color: var(--ink-faint);
+    background: var(--bg-soft);
+    border-right: 1px solid var(--rule);
+    text-align: right;
+    user-select: none;
+}
+
+.highlight td.code {
+    padding: 0.05rem 0.8rem;
+}
+
+.highlight pre {
+    margin: 0;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    white-space: pre;
+}

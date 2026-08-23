@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}{{ rel_path }} — file-viewer{% endblock %}
+
+{% block head_extra %}
+<style>{{ pygments_css | safe }}</style>
+{% endblock %}
+
+{% block actions %}
+<span class="meta-tag">{{ size }}</span>
+<span class="meta-tag">{{ mtime }}</span>
+<a class="action-link" href="{{ raw_url }}">raw ↗</a>
+{% endblock %}
+
+{% block content %}
+<article class="file-view file-view--{{ view_kind }}">
+    {{ body_html | safe }}
+</article>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}{{ rel_path }} — file-viewer{% endblock %}
+
+{% block content %}
+<section class="listing">
+    {% if not entries %}
+        <p class="empty">Empty directory.</p>
+    {% else %}
+    <table class="listing__table">
+        <thead>
+            <tr>
+                <th class="col-name">Name</th>
+                <th class="col-size">Size</th>
+                <th class="col-time">Modified</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if parent_path is not none %}
+            <tr class="listing__row listing__row--up">
+                <td class="col-name">
+                    {% if parent_path == "" %}
+                        <a href="{{ url_for('browse_root').path }}">↑ ..</a>
+                    {% else %}
+                        <a href="{{ url_for('browse', path=parent_path).path }}">↑ ..</a>
+                    {% endif %}
+                </td>
+                <td></td><td></td>
+            </tr>
+            {% endif %}
+            {% for entry in entries %}
+            <tr class="listing__row {% if entry.is_dir %}listing__row--dir{% else %}listing__row--file{% endif %}">
+                <td class="col-name">
+                    <a href="{{ url_for('browse', path=entry.browse_path).path }}">
+                        {% if entry.is_dir %}<span class="icon">▸</span>{% else %}<span class="icon">·</span>{% endif %}
+                        {{ entry.name }}{% if entry.is_dir %}/{% endif %}
+                    </a>
+                </td>
+                <td class="col-size">{{ entry.size }}</td>
+                <td class="col-time">{{ entry.mtime }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+</section>
+{% endblock %}

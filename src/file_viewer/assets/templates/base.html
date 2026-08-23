@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}file-viewer{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', path='style.css').path }}?v={{ static_version }}">
+    {% block head_extra %}{% endblock %}
+</head>
+<body>
+    <header class="topbar">
+        <nav class="crumbs" aria-label="Breadcrumb">
+            {% for label, p in breadcrumbs %}
+                {% if loop.last %}
+                    <span class="crumbs__here">{{ label }}</span>
+                {% elif p == "" %}
+                    <a class="crumbs__link" href="{{ url_for('browse_root').path }}">{{ label }}</a>
+                {% else %}
+                    <a class="crumbs__link" href="{{ url_for('browse', path=p).path }}">{{ label }}</a>
+                {% endif %}
+                {% if not loop.last %}<span class="crumbs__sep">/</span>{% endif %}
+            {% endfor %}
+        </nav>
+        <div class="topbar__actions">{% block actions %}{% endblock %}</div>
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>
